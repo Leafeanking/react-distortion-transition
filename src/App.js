@@ -1,26 +1,41 @@
 import React from 'react';
-import logo from './logo.svg';
+import img1Uri from './static/male-default.jpeg'
+import img2Uri from './static/female-default.jpeg'
+import styled from 'styled-components'
 import './App.css';
+import FilterTransition from './components/FilterTransition/FilterTransition';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const Button = styled.div`
+  margin: 10px;
+  padding: 10px;
+  border: solid 1px #000;
+`
+
+
+class App extends React.Component {
+  state = {
+    active: false,
+  }
+
+  _handleClick = () => {
+    this.setState({ active: !this.state.active })
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <FilterTransition
+          defaultElement={img1Uri}
+          secondaryElement={img2Uri}
+          active={this.state.active}
+        />
+
+        <div>
+          <Button onClick={this._handleClick}>Click Me // {JSON.stringify(this.state.active)}</Button>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default App;
